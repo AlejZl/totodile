@@ -1,0 +1,6 @@
+source;share/tutlebot3_slamNav/hook/pythonpath.ps1
+source;share/tutlebot3_slamNav/hook/pythonpath.dsv
+source;share/tutlebot3_slamNav/hook/pythonpath.sh
+source;share/tutlebot3_slamNav/hook/ament_prefix_path.ps1
+source;share/tutlebot3_slamNav/hook/ament_prefix_path.dsv
+source;share/tutlebot3_slamNav/hook/ament_prefix_path.sh
