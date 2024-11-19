@@ -17,7 +17,7 @@ def generate_launch_description():
             package='cartographer_ros',
             executable='cartographer_occupancy_grid_node',
             name='cartographer_occupancy_grid_node',
-            output='screen',
+            #output='screen',
             parameters=[
 
                 {'resolution':0.5},
@@ -31,7 +31,7 @@ def generate_launch_description():
             package='cartographer_ros',
             executable='cartographer_node',
             name='cartographer_node',
-            output='screen',
+            #output='screen',
             parameters=[
                 {'use_sim_time': False}
             ],
@@ -48,7 +48,7 @@ def generate_launch_description():
             package='rviz2',
             executable='rviz2',
             name='rviz2',
-            output='screen',
+            #output='screen',
             arguments=['-d', str(rviz_path)]
         ),
 
@@ -65,8 +65,8 @@ def generate_launch_description():
             
             package='tutlebot3_slamNav',
             executable='explorer_node',
-            output='screen',
-            prefix=['gnome-terminal --']
+            output='screen'
+            #prefix=['gnome-terminal --']
             )
     
     ])

@@ -1,0 +1,26 @@
+[0.436s] Invoking command in '/home/alex/workspace/ros2/totodile/src': PYTHONPATH=/home/alex/workspace/ros2/totodile/build/tutlebot3_slamNav/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../build/tutlebot3_slamNav build --build-base /home/alex/workspace/ros2/totodile/build/tutlebot3_slamNav/build install --record /home/alex/workspace/ros2/totodile/build/tutlebot3_slamNav/install.log --single-version-externally-managed install_data
+[0.620s] running egg_info
+[0.621s] writing ../build/tutlebot3_slamNav/tutlebot3_slamNav.egg-info/PKG-INFO
+[0.621s] writing dependency_links to ../build/tutlebot3_slamNav/tutlebot3_slamNav.egg-info/dependency_links.txt
+[0.621s] writing entry points to ../build/tutlebot3_slamNav/tutlebot3_slamNav.egg-info/entry_points.txt
+[0.621s] writing requirements to ../build/tutlebot3_slamNav/tutlebot3_slamNav.egg-info/requires.txt
+[0.621s] writing top-level names to ../build/tutlebot3_slamNav/tutlebot3_slamNav.egg-info/top_level.txt
+[0.622s] reading manifest file '../build/tutlebot3_slamNav/tutlebot3_slamNav.egg-info/SOURCES.txt'
+[0.623s] adding license file 'LICENSE'
+[0.623s] writing manifest file '../build/tutlebot3_slamNav/tutlebot3_slamNav.egg-info/SOURCES.txt'
+[0.623s] running build
+[0.623s] running build_py
+[0.623s] copying tutlebot3_slamNav/explorer_node.py -> /home/alex/workspace/ros2/totodile/build/tutlebot3_slamNav/build/lib/tutlebot3_slamNav
+[0.623s] running install
+[0.623s] running install_lib
+[0.624s] copying /home/alex/workspace/ros2/totodile/build/tutlebot3_slamNav/build/lib/tutlebot3_slamNav/explorer_node.py -> /home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/python3.10/site-packages/tutlebot3_slamNav
+[0.624s] byte-compiling /home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/python3.10/site-packages/tutlebot3_slamNav/explorer_node.py to explorer_node.cpython-310.pyc
+[0.625s] running install_data
+[0.625s] running install_egg_info
+[0.626s] removing '/home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/python3.10/site-packages/tutlebot3_slamNav-0.0.0-py3.10.egg-info' (and everything under it)
+[0.626s] Copying ../build/tutlebot3_slamNav/tutlebot3_slamNav.egg-info to /home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/python3.10/site-packages/tutlebot3_slamNav-0.0.0-py3.10.egg-info
+[0.627s] running install_scripts
+[0.641s] Installing explorer_node script to /home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/tutlebot3_slamNav
+[0.641s] Installing mainCode script to /home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/tutlebot3_slamNav
+[0.642s] writing list of installed files to '/home/alex/workspace/ros2/totodile/build/tutlebot3_slamNav/install.log'
+[0.655s] Invoked command in '/home/alex/workspace/ros2/totodile/src' returned '0': PYTHONPATH=/home/alex/workspace/ros2/totodile/build/tutlebot3_slamNav/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../build/tutlebot3_slamNav build --build-base /home/alex/workspace/ros2/totodile/build/tutlebot3_slamNav/build install --record /home/alex/workspace/ros2/totodile/build/tutlebot3_slamNav/install.log --single-version-externally-managed install_data
