@@ -52,21 +52,21 @@ def generate_launch_description():
             arguments=['-d', str(rviz_path)]
         ),
 
-        Node(
-        package='turtlebot3_teleop',
-        executable='teleop_keyboard',
-        output='screen',
-        prefix=['gnome-terminal --']
+        # Node(
+        # package='turtlebot3_teleop',
+        # executable='teleop_keyboard',
+        # output='screen',
+        # prefix=['gnome-terminal --']
 
-        ),
+        # ),
         
         # Custom node for mode switching
         Node(
             
             package='tutlebot3_slamNav',
             executable='explorer_node',
-            output='screen'
-            #prefix=['gnome-terminal --']
+            output='screen',
+            prefix=['gnome-terminal --']
             )
     
     ])

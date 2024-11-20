@@ -83,3 +83,42 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
+
+
+
+# def scan_callback(self, msg):
+#     twist = Twist()
+#     min_distance = 1.0  # Set your minimum distance threshold
+
+#     # Calculate the index for -90 and 90 degrees
+#     total_measurements = len(msg.ranges)
+#     angle_min = msg.angle_min
+#     angle_max = msg.angle_max
+#     angle_increment = msg.angle_increment
+
+#     # Calculate index for -90 degrees
+#     left_angle = -90.0 * (3.14159265359 / 180.0)  # Convert to radians
+#     left_index = int((left_angle - angle_min) / angle_increment)
+
+#     # Calculate index for 90 degrees
+#     right_angle = 90.0 * (3.14159265359 / 180.0)  # Convert to radians
+#     right_index = int((right_angle - angle_min) / angle_increment)
+
+#     # Ensure indices are within the range
+#     if left_index < 0 or left_index >= total_measurements:
+#         left_index = 0
+#     if right_index < 0 or right_index >= total_measurements:
+#         right_index = total_measurements - 1
+
+#     front_distance = msg.ranges[0]
+#     left_side_distance = msg.ranges[left_index]
+#     right_side_distance = msg.ranges[right_index]
+
+#     if front_distance > min_distance and left_side_distance > min_distance:
+#         twist.linear.x = 0.2  # Move forward
+#         twist.angular.z = 0.0
+#     else:
+#         twist.linear.x = 0.0  # Stop
+#         twist.angular.z = 0.5  # Turn left
+
+#     self.publisher.publish(twist)
