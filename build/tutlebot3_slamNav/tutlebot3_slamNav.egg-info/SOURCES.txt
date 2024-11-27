@@ -18,3 +18,4 @@ test/test_pep257.py
 tutlebot3_slamNav/__init__.py
 tutlebot3_slamNav/explorer_node.py
 tutlebot3_slamNav/mainCode.py
+tutlebot3_slamNav/vizualizer.py

@@ -65,8 +65,15 @@ def generate_launch_description():
             
             package='tutlebot3_slamNav',
             executable='explorer_node',
+            output='screen'#,
+            # prefix=['gnome-terminal --']
+            ),
+        Node(
+
+            package='tutlebot3_slamNav',
+            executable='vizualizer',
             output='screen',
             prefix=['gnome-terminal --']
-            )
+         )
     
     ])

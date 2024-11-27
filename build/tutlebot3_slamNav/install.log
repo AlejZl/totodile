@@ -1,7 +1,9 @@
 /home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/python3.10/site-packages/tutlebot3_slamNav/mainCode.py
+/home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/python3.10/site-packages/tutlebot3_slamNav/vizualizer.py
 /home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/python3.10/site-packages/tutlebot3_slamNav/explorer_node.py
 /home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/python3.10/site-packages/tutlebot3_slamNav/__init__.py
 /home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/python3.10/site-packages/tutlebot3_slamNav/__pycache__/mainCode.cpython-310.pyc
+/home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/python3.10/site-packages/tutlebot3_slamNav/__pycache__/vizualizer.cpython-310.pyc
 /home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/python3.10/site-packages/tutlebot3_slamNav/__pycache__/explorer_node.cpython-310.pyc
 /home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/python3.10/site-packages/tutlebot3_slamNav/__pycache__/__init__.cpython-310.pyc
 /home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/share/ament_index/resource_index/packages/tutlebot3_slamNav
@@ -17,3 +19,4 @@
 /home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/python3.10/site-packages/tutlebot3_slamNav-0.0.0-py3.10.egg-info/entry_points.txt
 /home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/tutlebot3_slamNav/explorer_node
 /home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/tutlebot3_slamNav/mainCode
+/home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/tutlebot3_slamNav/vizualizer

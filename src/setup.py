@@ -27,7 +27,8 @@ setup(
     entry_points={
         'console_scripts': [
             'mainCode = tutlebot3_slamNav.mainCode:main',
-			'explorer_node = tutlebot3_slamNav.explorer_node:main'
+			'explorer_node = tutlebot3_slamNav.explorer_node:main',
+			'vizualizer = tutlebot3_slamNav.vizualizer:main'
         ],
     },
 )

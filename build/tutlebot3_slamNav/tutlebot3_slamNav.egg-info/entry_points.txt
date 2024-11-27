@@ -1,4 +1,5 @@
 [console_scripts]
 explorer_node = tutlebot3_slamNav.explorer_node:main
 mainCode = tutlebot3_slamNav.mainCode:main
+vizualizer = tutlebot3_slamNav.vizualizer:main
 
