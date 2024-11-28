@@ -1,0 +1,22 @@
+running egg_info
+writing ../build/tutlebot3_slamNav/tutlebot3_slamNav.egg-info/PKG-INFO
+writing dependency_links to ../build/tutlebot3_slamNav/tutlebot3_slamNav.egg-info/dependency_links.txt
+writing entry points to ../build/tutlebot3_slamNav/tutlebot3_slamNav.egg-info/entry_points.txt
+writing requirements to ../build/tutlebot3_slamNav/tutlebot3_slamNav.egg-info/requires.txt
+writing top-level names to ../build/tutlebot3_slamNav/tutlebot3_slamNav.egg-info/top_level.txt
+reading manifest file '../build/tutlebot3_slamNav/tutlebot3_slamNav.egg-info/SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file '../build/tutlebot3_slamNav/tutlebot3_slamNav.egg-info/SOURCES.txt'
+running build
+running build_py
+running install
+running install_lib
+running install_data
+running install_egg_info
+removing '/home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/python3.10/site-packages/tutlebot3_slamNav-0.0.0-py3.10.egg-info' (and everything under it)
+Copying ../build/tutlebot3_slamNav/tutlebot3_slamNav.egg-info to /home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/python3.10/site-packages/tutlebot3_slamNav-0.0.0-py3.10.egg-info
+running install_scripts
+Installing explorer_node script to /home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/tutlebot3_slamNav
+Installing mainCode script to /home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/tutlebot3_slamNav
+Installing vizualizer script to /home/alex/workspace/ros2/totodile/install/tutlebot3_slamNav/lib/tutlebot3_slamNav
+writing list of installed files to '/home/alex/workspace/ros2/totodile/build/tutlebot3_slamNav/install.log'

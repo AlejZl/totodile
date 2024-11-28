@@ -11,7 +11,7 @@ class Float32MultiArrayPlotter(Node):
         super().__init__('float32_multiarray_plotter')
         self.subscription = self.create_subscription(
             Float32MultiArray,
-            '/front_view',  # Replace with your topic name
+            '/left_view',  # Replace with your topic name
             self.listener_callback,
             10)
         self.data_buffer = []
