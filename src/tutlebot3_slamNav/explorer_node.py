@@ -117,6 +117,7 @@ class LeftHandRuleExplorer(Node):
         elif not bool(self.status["front"]):  # If front is free, move forward
             command.angular.z = 0.0
             command.linear.x = 0.07
+            self.get_logger().info("FRONT IS FREE")
 
         else:  # Otherwise, prepare to rotate
             self.rotating = True
