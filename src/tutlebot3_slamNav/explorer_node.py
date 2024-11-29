@@ -5,29 +5,54 @@ from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import LaserScan, Imu
 from std_msgs.msg import Float32MultiArray, String
+from rclpy.qos import QoSProfile, ReliabilityPolicy, DurabilityPolicy
 
+# Angle ranges for different views:
+# 70°-130°: front
+# 10°-70°: right
+# 130°-190°: left
+# 180°-10°: back
 
 class LeftHandRuleExplorer(Node):
     def __init__(self):
         super().__init__("Explorer")
+
+        # Publisher to send velocity commands to the robot
         self.motors = self.create_publisher(Twist, '/cmd_vel', 10)
 
-        # Subscriptions
+        # Subscriptions for detecting status (free or occupied) of different views
         self.front_view_info = self.create_subscription(String, '/front_view_info', self.front_view_callback, 10)
         self.left_view_info = self.create_subscription(String, '/left_view_info', self.left_view_callback, 10)
         self.right_view_info = self.create_subscription(String, '/right_view_info', self.right_view_callback, 10)
 
-        self.imu_sub = self.create_subscription(Imu, '/imu', self.imu_callback, 10)
+        # Subscription to the robot's IMU for orientation data
+        self.imu_subscriber = self.create_subscription(Imu, '/imu', self.imu_callback, 10)
 
-        # Status and control variables
-        self.status = {"front": 0, "left": 0, "right": 0}  # 0 = free, 1 = occupied
+        # Subscriptions to receive raw distance data from sensors
+        self.front_value = self.create_subscription(Float32MultiArray, '/front_view', self.front_data_callback, 10)
+        self.left_value = self.create_subscription(Float32MultiArray, '/left_view', self.left_data_callback, 10)
+        self.right_value = self.create_subscription(Float32MultiArray, '/right_view', self.right_data_callback, 10)
+
+        # Status dictionary to track the state of each direction (0 = free, 1 = occupied)
+        self.status = {"front": 0, "left": 0, "right": 0}
+
+        # Variables to manage rotation and wall-following behavior
         self.rotating = False
         self.followingWall = False
-        self.target_yaw = None  # Desired yaw for rotation
-        self.current_yaw = 0.0  # Current yaw from IMU
+        self.currentYaw = None
+        self.targetYaw = None
+
+        # Reference values for rotation comparison
+        self.rotRef = 0
+        self.lastRef = 100
 
         self.get_logger().info('LeftHandRuleExplorer Node has been started')
 
+    # Callback to update the robot's current yaw angle from the IMU data
+    def imu_callback(self, msg: Imu):
+        self.currentYaw = msg.orientation.z
+
+    # Callbacks to update the status of different views based on String messages
     def front_view_callback(self, msg: String):
         self.status["front"] = 0 if msg.data == "Free" else 1
         self.update_explorer()
@@ -40,53 +65,68 @@ class LeftHandRuleExplorer(Node):
         self.status["right"] = 0 if msg.data == "Free" else 1
         self.update_explorer()
 
-    def imu_callback(self, msg: Imu):
-        # Extract yaw from quaternion
-        q = msg.orientation
-        self.current_yaw = np.arctan2(
-            2.0 * (q.w * q.z + q.x * q.y),
-            1.0 - 2.0 * (q.y * q.y + q.z * q.z)
-        )
+    # Callbacks to process raw sensor data and compute the mean distance for each view
+    def front_data_callback(self, msg: Float32MultiArray):
+        self.front_value = np.nan_to_num(np.mean(msg.data), nan=0.0)
 
+    def left_data_callback(self, msg: Float32MultiArray):
+        self.left_value = np.nan_to_num(np.mean(msg.data), nan=0.0)
+
+    def right_data_callback(self, msg: Float32MultiArray):
+        self.right_value = np.nan_to_num(np.mean(msg.data), nan=0.0)
+
+    # Utility method to compute the mean of a list while handling NaN values
+    def mean(self, data=list):
+        return np.mean(np.nan_to_num(data))
+
+    # Check if the rotation has completed based on sensor readings
     def rotation_finished(self):
-        # Check if the robot's yaw has reached the target yaw
-        if self.target_yaw is None:
-            return False
+        self.get_logger().info("ROTATION CHECKUP...")
+        left_part = round(self.mean(self.left_value), 1)
+        compare_part = round(self.mean(self.rotRef), 1)
 
-        yaw_diff = abs(self.current_yaw - self.target_yaw)
-        self.get_logger().info(f"Current Yaw: {self.current_yaw:.2f}, Target Yaw: {self.target_yaw:.2f}, Diff: {yaw_diff:.2f}")
-        return yaw_diff < 0.1  # Rotation considered finished if yaw difference is small
+        self.get_logger().info(f"left_current_value: {left_part}")
+        self.get_logger().info(f"comp_current_value: {compare_part}")
 
+        return not (left_part >= compare_part)
+
+    # Main logic to update the robot's behavior based on current state and sensor data
     def update_explorer(self):
         command = Twist()
         command.linear.x = 0.0
         command.angular.z = 0.0
 
-        if self.rotating:
-            self.get_logger().info("ROTATING...")
+        if self.rotating:  # If rotating, execute the rotation logic
+            radPerSec = 0.4
+            command.linear.x = 0.0
+
             if self.rotation_finished():
                 self.rotating = False
-                self.target_yaw = None
                 command.angular.z = 0.0
-                #self.followingWall = True
+                self.followingWall = True
             else:
-                command.angular.z = -0.4  # Continue rotating
-        elif self.followingWall:
-            self.get_logger().info("FOLLOWING WALL...")
+                command.angular.z = -radPerSec
+                self.lastRef = self.mean(self.left_value)
+
+        elif self.followingWall:  # If following the wall, continue wall-following behavior
             command.linear.x = 0.0
             command.angular.z = 0.0
-            # Add wall-following logic (e.g., PID control for keeping distance from the wall)
-        elif self.status["front"] == 0:  # Front is free
-            self.get_logger().info("MOVING FORWARD...")
-            command.linear.x = 0.13
-        else:  # Front is blocked
-            self.get_logger().info("FRONT BLOCKED: STARTING ROTATION...")
+            self.get_logger().info("FOLLOWING WALL PART")
+            self.followingWall = False
+
+        elif not bool(self.status["front"]):  # If front is free, move forward
+            command.angular.z = 0.0
+            command.linear.x = 0.07
+
+        else:  # Otherwise, prepare to rotate
             self.rotating = True
-            self.target_yaw = (self.current_yaw - np.pi / 2) % (2 * np.pi)  # Rotate 90 degrees clockwise
+            self.targetYaw = self.currentYaw + 0.70
 
+            if self.targetYaw > 1:
+                self.targetYaw = 1.0 - (self.targetYaw - 1.0)
 
+        # Publish the command to the motors
         self.motors.publish(command)
-
 
 def main(args=None):
     rclpy.init(args=args)
@@ -96,7 +136,6 @@ def main(args=None):
     except KeyboardInterrupt:
         pass
     rclpy.shutdown()
-
 
 if __name__ == '__main__':
     main()
